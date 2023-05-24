@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UrbondoUserServiceApplication {
+public class UrbondoAnnouncementServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UrbondoUserServiceApplication.class, args);
+		SpringApplication.run(UrbondoAnnouncementServiceApplication.class, args);
 	}
 
 }
