@@ -23,15 +23,24 @@ public final class AnnouncementEntity {
     @DynamoDBAttribute
     private String categoryTitle;
 
+    @DynamoDBAttribute
+    private String userId;
+
     public AnnouncementEntity() {
     }
 
-    public AnnouncementEntity(String id, String title, String body, String categoryId, String categoryTitle) {
+    public AnnouncementEntity(String id,
+                              String title,
+                              String body,
+                              String categoryId,
+                              String categoryTitle,
+                              String userId) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.categoryId = categoryId;
         this.categoryTitle = categoryTitle;
+        this.userId = userId;
     }
 
     public String getId() {
@@ -72,5 +81,13 @@ public final class AnnouncementEntity {
 
     public void setCategoryTitle(String categoryTitle) {
         this.categoryTitle = categoryTitle;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

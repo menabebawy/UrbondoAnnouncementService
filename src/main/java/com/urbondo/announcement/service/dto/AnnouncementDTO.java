@@ -4,4 +4,5 @@ public record AnnouncementDTO(String id,
                               String title,
                               String body,
                               String categoryId,
-                              String categoryTitle) {}
+                              String categoryTitle,
+                              String userId) {}
