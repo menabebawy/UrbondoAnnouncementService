@@ -1,4 +1,4 @@
-package com.urbondo.announcement.service;
+package com.urbondo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

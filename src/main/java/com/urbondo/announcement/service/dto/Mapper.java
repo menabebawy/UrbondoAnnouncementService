@@ -1,13 +1,13 @@
 package com.urbondo.announcement.service.dto;
 
 import com.urbondo.announcement.service.entity.AnnouncementEntity;
-import com.urbondo.announcement.service.entity.CategoryEntity;
+import com.urbondo.category.service.repository.CategoryDAO;
 
 public final class Mapper {
     private Mapper() {}
 
-    public static CategoryDTO transferTo(CategoryEntity categoryEntity) {
-        return new CategoryDTO(categoryEntity.getId(), categoryEntity.getTitle());
+    public static CategoryDTO transferTo(CategoryDAO categoryDAO) {
+        return new CategoryDTO(categoryDAO.getId(), categoryDAO.getTitle());
     }
 
     public static AnnouncementDTO transferTo(AnnouncementEntity announcementEntity) {

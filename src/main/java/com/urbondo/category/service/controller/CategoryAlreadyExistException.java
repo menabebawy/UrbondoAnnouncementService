@@ -1,4 +1,4 @@
-package com.urbondo.announcement.service.exception;
+package com.urbondo.category.service.controller;
 
 public class CategoryAlreadyExistException extends RuntimeException {
     public CategoryAlreadyExistException(String title) {

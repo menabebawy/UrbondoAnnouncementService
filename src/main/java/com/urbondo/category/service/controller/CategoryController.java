@@ -1,9 +1,8 @@
-package com.urbondo.announcement.service.controller;
+package com.urbondo.category.service.controller;
 
-import com.urbondo.announcement.service.dto.AddCategoryRequestDTO;
-import com.urbondo.announcement.service.dto.AddCategoryResponseDTO;
 import com.urbondo.announcement.service.dto.CategoryDTO;
-import com.urbondo.announcement.service.service.CategoryService;
+import com.urbondo.category.service.service.Category;
+import com.urbondo.category.service.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,12 +21,13 @@ public class CategoryController {
     @GetMapping("/{id}")
     @ResponseStatus(OK)
     CategoryDTO fetchById(@PathVariable @Valid final String id) {
-        return categoryService.findById(id);
+        Category category = categoryService.findById(id);
+        return new CategoryDTO(category.id(), category.title());
     }
 
     @PostMapping
     @ResponseStatus(CREATED)
     AddCategoryResponseDTO add(@RequestBody @Valid final AddCategoryRequestDTO requestDTO) {
-        return categoryService.add(requestDTO);
+        return new AddCategoryResponseDTO(categoryService.add(requestDTO.title()));
     }
 }

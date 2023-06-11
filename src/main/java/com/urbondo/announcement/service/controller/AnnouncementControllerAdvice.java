@@ -1,7 +1,7 @@
 package com.urbondo.announcement.service.controller;
 
-import com.urbondo.announcement.service.exception.CategoryAlreadyExistException;
-import com.urbondo.announcement.service.exception.CategoryNotFoundException;
+import com.urbondo.category.service.controller.CategoryAlreadyExistException;
+import com.urbondo.category.service.controller.CategoryNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

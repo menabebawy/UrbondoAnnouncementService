@@ -1,4 +1,4 @@
-package com.urbondo.announcement.service.exception;
+package com.urbondo.category.service.controller;
 
 public class CategoryNotFoundException extends RuntimeException {
     public CategoryNotFoundException(String id) {

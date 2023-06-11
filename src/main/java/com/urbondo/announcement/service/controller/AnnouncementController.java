@@ -22,25 +22,25 @@ public class AnnouncementController {
     @GetMapping("/{id}")
     @ResponseStatus(OK)
     AnnouncementDTO fetchById(@PathVariable @Valid final String id) {
-        return announcementService.findById(id);
+        return null; //announcementService.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(CREATED)
     AddAnnouncementResponseDTO addAnnouncement(@RequestBody @Valid final AddAnnouncementRequestDTO requestDTO) {
-        return announcementService.add(requestDTO);
+        return null; //announcementService.add(requestDTO);
     }
 
     @PutMapping
     @ResponseStatus(OK)
     AnnouncementDTO update(@RequestBody @Valid final UpdateAnnouncementRequestDTO requestDTO) {
-        return announcementService.update(requestDTO);
+        return null; //announcementService.update(requestDTO);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
     void deleteById(@PathVariable @Valid final String id) {
-        announcementService.deleteById(id);
+        //announcementService.deleteById(id);
     }
 }
 
