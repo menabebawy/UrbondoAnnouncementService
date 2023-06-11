@@ -1,4 +1,4 @@
-package com.urbondo.announcement.service.exception;
+package com.urbondo.announcement.service.controller;
 
 public class AnnouncementNotFoundException extends RuntimeException {
     public AnnouncementNotFoundException(String id) {

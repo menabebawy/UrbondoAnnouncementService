@@ -1,5 +1,6 @@
 package com.urbondo;
 
+import com.urbondo.announcement.service.controller.AnnouncementNotFoundException;
 import com.urbondo.category.service.controller.CategoryAlreadyExistException;
 import com.urbondo.category.service.controller.CategoryNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class ControllerAdvice {
 
 
     @ResponseBody
-    @ExceptionHandler(CategoryNotFoundException.class)
+    @ExceptionHandler({CategoryNotFoundException.class, AnnouncementNotFoundException.class})
     ResponseEntity<ErrorResponse> handleUserNotFoundException(Throwable exception) {
         return generateResponseEntity(NOT_FOUND, exception);
     }

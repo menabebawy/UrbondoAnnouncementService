@@ -1,6 +1,5 @@
 package com.urbondo.category.service.controller;
 
-import com.urbondo.announcement.service.dto.CategoryDTO;
 import com.urbondo.category.service.service.Category;
 import com.urbondo.category.service.service.CategoryService;
 import jakarta.validation.Valid;
