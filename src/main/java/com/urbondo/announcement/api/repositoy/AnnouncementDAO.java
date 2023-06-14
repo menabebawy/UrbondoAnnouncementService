@@ -3,7 +3,6 @@ package com.urbondo.announcement.api.repositoy;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
-import com.urbondo.announcement.api.controller.AnnouncementDTO;
 
 @DynamoDBTable(tableName = "urbondo-announcement")
 public final class AnnouncementDAO {
@@ -88,9 +87,5 @@ public final class AnnouncementDAO {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public AnnouncementDTO transferTo() {
-        return new AnnouncementDTO(id, title, body, categoryId, categoryTitle, userId);
     }
 }

@@ -1,5 +1,6 @@
 package com.urbondo.announcement.api.controller;
 
+import com.urbondo.announcement.api.repositoy.AnnouncementDAO;
 import com.urbondo.announcement.api.service.AnnouncementService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +20,19 @@ public class AnnouncementController {
 
     @GetMapping("/{id}")
     @ResponseStatus(OK)
-    AnnouncementDTO fetchById(@PathVariable @Valid String id) {
+    AnnouncementDAO fetchById(@PathVariable @Valid String id) {
         return announcementService.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(CREATED)
-    AnnouncementDTO addAnnouncement(@RequestBody @Valid AddRequestDTO requestDTO) {
+    AnnouncementDAO addAnnouncement(@RequestBody @Valid AddRequestDTO requestDTO) {
         return announcementService.add(requestDTO);
     }
 
     @PutMapping
     @ResponseStatus(OK)
-    AnnouncementDTO update(@RequestBody @Valid UpdateRequestDTO requestDTO) {
+    AnnouncementDAO update(@RequestBody @Valid UpdateRequestDTO requestDTO) {
         return announcementService.update(requestDTO);
     }
 

@@ -2,7 +2,6 @@ package com.urbondo.announcement.api.service;
 
 import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
 import com.urbondo.announcement.api.controller.AddRequestDTO;
-import com.urbondo.announcement.api.controller.AnnouncementDTO;
 import com.urbondo.announcement.api.controller.AnnouncementNotFoundException;
 import com.urbondo.announcement.api.controller.UpdateRequestDTO;
 import com.urbondo.announcement.api.repositoy.AnnouncementDAO;
@@ -28,18 +27,18 @@ class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
-    public AnnouncementDTO findById(String id) {
+    public AnnouncementDAO findById(String id) {
         Optional<AnnouncementDAO> announcementDAO = announcementRepository.findById(id);
 
         if (announcementDAO.isEmpty()) {
             throw new ResourceNotFoundException(id);
         }
 
-        return announcementDAO.get().transferTo();
+        return announcementDAO.get();
     }
 
     @Override
-    public AnnouncementDTO add(AddRequestDTO requestDTO) {
+    public AnnouncementDAO add(AddRequestDTO requestDTO) {
         CategoryDAO categoryDAO = getCategoryDaoOrThrowException(requestDTO.getCategoryId());
 
         AnnouncementDAO announcementDAO = new AnnouncementDAO(UUID.randomUUID().toString(),
@@ -48,7 +47,7 @@ class AnnouncementServiceImpl implements AnnouncementService {
                                                               requestDTO.getCategoryId(),
                                                               categoryDAO.getTitle(),
                                                               requestDTO.getUserId());
-        return announcementRepository.save(announcementDAO).transferTo();
+        return announcementRepository.save(announcementDAO);
     }
 
     private CategoryDAO getCategoryDaoOrThrowException(String id) {
@@ -61,7 +60,7 @@ class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
-    public AnnouncementDTO update(UpdateRequestDTO requestDTO) {
+    public AnnouncementDAO update(UpdateRequestDTO requestDTO) {
         AnnouncementDAO storedAnnouncementDao = findByIdOrThrowException(requestDTO.getId());
         CategoryDAO categoryDAO = getCategoryDaoOrThrowException(requestDTO.getCategoryId());
 
@@ -72,7 +71,7 @@ class AnnouncementServiceImpl implements AnnouncementService {
 
         announcementRepository.save(storedAnnouncementDao);
 
-        return storedAnnouncementDao.transferTo();
+        return storedAnnouncementDao;
     }
 
     private AnnouncementDAO findByIdOrThrowException(String id) {
