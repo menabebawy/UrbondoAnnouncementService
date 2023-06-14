@@ -20,7 +20,7 @@ class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDAO findById(final String id) {
+    public CategoryDAO findById(String id) {
         Optional<CategoryDAO> categoryDAO = categoryRepository.findById(id);
         if (categoryDAO.isEmpty()) {
             throw new ResourceNotFoundException();
@@ -29,7 +29,7 @@ class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDAO add(final String title) {
+    public CategoryDAO add(String title) {
         if (categoryRepository.findByTitle(title).isPresent()) {
             throw new CategoryAlreadyExistException(title);
         }
