@@ -21,13 +21,13 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     @ResponseStatus(OK)
-    CategoryDAO fetchById(@PathVariable @Valid final String id) {
+    CategoryDAO fetchById(@PathVariable @Valid String id) {
         return categoryService.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(CREATED)
-    CategoryDAO add(@RequestBody @Valid final AddRequestDTO requestDTO) {
+    CategoryDAO add(@RequestBody @Valid AddCategoryRequestDTO requestDTO) {
         return categoryService.add(requestDTO.title());
     }
 }

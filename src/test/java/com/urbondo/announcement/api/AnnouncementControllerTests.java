@@ -14,9 +14,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = AnnouncementController.class)
-public class AnnouncementControllerTests {
+class AnnouncementControllerTests {
     private final static String BASE_URL = "/announcement";
-    private final static String ID = "";
+    private final static String ID = "13";
     @Autowired
     MockMvc mockMvc;
     @MockBean
