@@ -1,26 +1,20 @@
 package com.urbondo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.http.HttpStatus;
 
 import java.util.Date;
 
-import static com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING;
-
 public class ErrorResponse {
-    @JsonFormat(shape = STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private final Date timestamp;
     private final int code;
     private final String status;
     private final String message;
-    private final String stackTrace;
 
-    ErrorResponse(HttpStatus httpStatus, String message, String stackTrace) {
+    public ErrorResponse(HttpStatus httpStatus, String message) {
         this.timestamp = new Date();
         this.code = httpStatus.value();
         this.status = httpStatus.name();
         this.message = message;
-        this.stackTrace = stackTrace;
     }
 
     public Date getTimestamp() {
@@ -39,7 +33,4 @@ public class ErrorResponse {
         return message;
     }
 
-    public String getStackTrace() {
-        return stackTrace;
-    }
 }
