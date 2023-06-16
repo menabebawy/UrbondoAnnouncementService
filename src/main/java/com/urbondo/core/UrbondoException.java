@@ -1,4 +1,4 @@
-package com.urbondo;
+package com.urbondo.core;
 
 public class UrbondoException extends RuntimeException {
     public UrbondoException(String message) {

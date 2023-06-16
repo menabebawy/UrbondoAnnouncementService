@@ -1,10 +1,10 @@
 package com.urbondo.announcement.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.urbondo.announcement.api.controller.AddRequestDTO;
+import com.urbondo.announcement.api.controller.AddRequestDto;
 import com.urbondo.announcement.api.controller.AnnouncementController;
-import com.urbondo.announcement.api.controller.UpdateRequestDTO;
-import com.urbondo.announcement.api.repositoy.AnnouncementDAO;
+import com.urbondo.announcement.api.controller.UpdateRequestDto;
+import com.urbondo.announcement.api.repositoy.AnnouncementDao;
 import com.urbondo.announcement.api.service.AnnouncementService;
 import com.urbondo.category.api.controller.ResourceNotFoundException;
 import org.hamcrest.Matchers;
@@ -36,18 +36,18 @@ class AnnouncementControllerTests {
     @MockBean
     AnnouncementService announcementService;
 
-    private static Stream<AddRequestDTO> provideStreamOfInvalidAddRequestDTO() {
-        return Stream.of(new AddRequestDTO("", "body", "12", "123"),
-                         new AddRequestDTO("title", null, "12", "123"),
-                         new AddRequestDTO("title", "body", null, "123"),
-                         new AddRequestDTO("title", "body", "12", null));
+    private static Stream<AddRequestDto> provideStreamOfInvalidAddRequestDTO() {
+        return Stream.of(new AddRequestDto("", "body", "12", "123"),
+                new AddRequestDto("title", null, "12", "123"),
+                new AddRequestDto("title", "body", null, "123"),
+                new AddRequestDto("title", "body", "12", null));
     }
 
-    private static Stream<UpdateRequestDTO> provideStreamOfInvalidUpdateRequestDTO() {
-        return Stream.of(new UpdateRequestDTO("", "title", "body", "12"),
-                         new UpdateRequestDTO(ID, "", "body", "12"),
-                         new UpdateRequestDTO(ID, "title", "body", ""),
-                         new UpdateRequestDTO(ID, "title", null, "12"));
+    private static Stream<UpdateRequestDto> provideStreamOfInvalidUpdateRequestDTO() {
+        return Stream.of(new UpdateRequestDto("", "title", "body", "12"),
+                new UpdateRequestDto(ID, "", "body", "12"),
+                new UpdateRequestDto(ID, "title", "body", ""),
+                new UpdateRequestDto(ID, "title", null, "12"));
     }
 
     @Test
@@ -55,7 +55,7 @@ class AnnouncementControllerTests {
         when(announcementService.findById(ID)).thenThrow(new ResourceNotFoundException());
 
         mockMvc.perform(get(BASE_URL + "/" + ID)
-                                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
 
@@ -64,7 +64,7 @@ class AnnouncementControllerTests {
         when(announcementService.findById(ID)).thenReturn(announcementDAO());
 
         mockMvc.perform(get(BASE_URL + "/" + ID)
-                                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", Matchers.is(ID)))
                 .andExpect(jsonPath("$.title", Matchers.is(announcementDAO().getTitle())))
@@ -74,22 +74,22 @@ class AnnouncementControllerTests {
 
     @ParameterizedTest
     @MethodSource("provideStreamOfInvalidAddRequestDTO")
-    void whenPostAnnouncement_givenInvalidRequest_thenBadRequest(AddRequestDTO addRequestDTO) throws Exception {
+    void whenPostAnnouncement_givenInvalidRequest_thenBadRequest(AddRequestDto addRequestDTO) throws Exception {
         mockMvc.perform(post(BASE_URL)
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(addRequestDTO)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(addRequestDTO)))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     void whenPostAnnouncement_givenValidRequest_thenCorrect() throws Exception {
-        AddRequestDTO requestDTO = new AddRequestDTO("Title", "Body", CATEGORY_ID, "123");
+        AddRequestDto requestDTO = new AddRequestDto("Title", "Body", CATEGORY_ID, "123");
 
         when(announcementService.add(any())).thenReturn(announcementDAO());
 
         mockMvc.perform(post(BASE_URL)
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(requestDTO)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(requestDTO)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title", Matchers.is(requestDTO.getTitle())))
                 .andExpect(jsonPath("$.categoryTitle", Matchers.is(announcementDAO().getCategoryTitle())));
@@ -97,31 +97,31 @@ class AnnouncementControllerTests {
 
     @ParameterizedTest
     @MethodSource("provideStreamOfInvalidUpdateRequestDTO")
-    void whenPutAnnouncement_givenInvalidRequest_thenBadRequest(UpdateRequestDTO requestDTO) throws Exception {
+    void whenPutAnnouncement_givenInvalidRequest_thenBadRequest(UpdateRequestDto requestDTO) throws Exception {
         mockMvc.perform(put(BASE_URL).contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(requestDTO)))
+                        .content(objectMapper.writeValueAsString(requestDTO)))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     void whenPutAnnouncement_givenValidRequest_thenCorrect() throws Exception {
         String newTitle = "New Title";
-        UpdateRequestDTO requestDTO = new UpdateRequestDTO(ID,
-                                                           newTitle,
-                                                           announcementDAO().getBody(),
-                                                           announcementDAO().getCategoryId());
+        UpdateRequestDto requestDTO = new UpdateRequestDto(ID,
+                newTitle,
+                announcementDAO().getBody(),
+                announcementDAO().getCategoryId());
 
-        AnnouncementDAO updatedDAO = new AnnouncementDAO(ID,
-                                                         newTitle,
-                                                         announcementDAO().getBody(),
-                                                         announcementDAO().getCategoryId(),
-                                                         announcementDAO().getCategoryTitle(),
-                                                         announcementDAO().getUserId());
+        AnnouncementDao updatedDAO = new AnnouncementDao(ID,
+                newTitle,
+                announcementDAO().getBody(),
+                announcementDAO().getCategoryId(),
+                announcementDAO().getCategoryTitle(),
+                announcementDAO().getUserId());
 
         when(announcementService.update(any())).thenReturn(updatedDAO);
 
         mockMvc.perform(put(BASE_URL).contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(requestDTO)))
+                        .content(objectMapper.writeValueAsString(requestDTO)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title", Matchers.is(newTitle)));
     }
@@ -129,11 +129,11 @@ class AnnouncementControllerTests {
     @Test
     void whenDeleteAnnouncement_givenFoundId_thenNoContent() throws Exception {
         mockMvc.perform(delete(BASE_URL + "/" + ID)
-                                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
 
-    private AnnouncementDAO announcementDAO() {
-        return new AnnouncementDAO(ID, "Title", "Body", CATEGORY_ID, "Category Title", "123");
+    private AnnouncementDao announcementDAO() {
+        return new AnnouncementDao(ID, "Title", "Body", CATEGORY_ID, "Category Title", "123");
     }
 }

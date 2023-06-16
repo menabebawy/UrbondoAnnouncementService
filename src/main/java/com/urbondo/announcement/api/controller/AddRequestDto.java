@@ -2,11 +2,11 @@ package com.urbondo.announcement.api.controller;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class AddRequestDTO extends AnnouncementRequestDTO {
+public class AddRequestDto extends AnnouncementRequestDto {
     @NotBlank(message = "user id must not blank")
     private final String userId;
 
-    public AddRequestDTO(String title,
+    public AddRequestDto(String title,
                          String body,
                          String categoryId,
                          String userId) {

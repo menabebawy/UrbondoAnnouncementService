@@ -5,7 +5,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 @DynamoDBTable(tableName = "urbondo-announcement")
-public final class AnnouncementDAO {
+public final class AnnouncementDao {
     @DynamoDBHashKey
     private String id;
 
@@ -24,10 +24,10 @@ public final class AnnouncementDAO {
     @DynamoDBAttribute
     private String userId;
 
-    AnnouncementDAO() {
+    AnnouncementDao() {
     }
 
-    public AnnouncementDAO(String id,
+    public AnnouncementDao(String id,
                            String title,
                            String body,
                            String categoryId,
@@ -39,14 +39,6 @@ public final class AnnouncementDAO {
         this.categoryId = categoryId;
         this.categoryTitle = categoryTitle;
         this.userId = userId;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getTitle() {

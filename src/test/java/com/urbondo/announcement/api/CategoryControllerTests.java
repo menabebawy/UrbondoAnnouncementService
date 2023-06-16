@@ -1,10 +1,10 @@
 package com.urbondo.announcement.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.urbondo.category.api.controller.AddCategoryRequestDTO;
+import com.urbondo.category.api.controller.AddCategoryRequestDto;
 import com.urbondo.category.api.controller.CategoryController;
 import com.urbondo.category.api.controller.ResourceNotFoundException;
-import com.urbondo.category.api.repository.CategoryDAO;
+import com.urbondo.category.api.repository.CategoryDao;
 import com.urbondo.category.api.service.CategoryService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -35,9 +35,9 @@ class CategoryControllerTests {
     @MockBean
     CategoryService categoryService;
 
-    private static Stream<AddCategoryRequestDTO> provideStreamOfAddRequests() {
-        return Stream.of(new AddCategoryRequestDTO(""),
-                         new AddCategoryRequestDTO(null));
+    private static Stream<AddCategoryRequestDto> provideStreamOfAddRequests() {
+        return Stream.of(new AddCategoryRequestDto(""),
+                new AddCategoryRequestDto(null));
     }
 
     @Test
@@ -59,28 +59,28 @@ class CategoryControllerTests {
 
     @ParameterizedTest
     @MethodSource("provideStreamOfAddRequests")
-    void whenPostCategory_givenInvalidRequest_thenBadRequest(AddCategoryRequestDTO requestDTO) throws Exception {
+    void whenPostCategory_givenInvalidRequest_thenBadRequest(AddCategoryRequestDto requestDTO) throws Exception {
         mockMvc.perform(post(BASE_URL)
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(requestDTO)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(requestDTO)))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     void whenPostCategory_givenValidRequest_thenCorrect() throws Exception {
         String title = "Building";
-        AddCategoryRequestDTO requestDTO = new AddCategoryRequestDTO(title);
+        AddCategoryRequestDto requestDTO = new AddCategoryRequestDto(title);
 
-        when(categoryService.add(title)).thenReturn(new CategoryDAO(ID, title));
+        when(categoryService.add(title)).thenReturn(new CategoryDao(ID, title));
 
         mockMvc.perform(post(BASE_URL)
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(requestDTO)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(requestDTO)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title", Matchers.is(title)));
     }
 
-    private CategoryDAO categoryDAO() {
-        return new CategoryDAO(ID, TITLE);
+    private CategoryDao categoryDAO() {
+        return new CategoryDao(ID, TITLE);
     }
 }

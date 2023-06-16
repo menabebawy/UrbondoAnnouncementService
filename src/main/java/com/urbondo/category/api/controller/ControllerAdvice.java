@@ -1,6 +1,6 @@
 package com.urbondo.category.api.controller;
 
-import com.urbondo.ErrorResponse;
+import com.urbondo.core.ErrorResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

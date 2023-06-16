@@ -1,11 +1,9 @@
 package com.urbondo.category.api.repository;
 
+import com.urbondo.core.UrbondoRepository;
+
 import java.util.Optional;
 
-public interface CategoryRepository {
-    Optional<CategoryDAO> findById(String id);
-
-    Optional<CategoryDAO> findByTitle(String title);
-
-    CategoryDAO save(CategoryDAO categoryDAO);
+public interface CategoryRepository extends UrbondoRepository<CategoryDao> {
+    Optional<CategoryDao> findByTitle(String title);
 }

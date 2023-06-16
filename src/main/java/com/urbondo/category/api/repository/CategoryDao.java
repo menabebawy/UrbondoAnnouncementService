@@ -6,7 +6,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 @DynamoDBTable(tableName = "urbondo-category")
-public final class CategoryDAO {
+public final class CategoryDao {
     @DynamoDBHashKey
     private String id;
 
@@ -14,10 +14,10 @@ public final class CategoryDAO {
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "title-index")
     private String title;
 
-    CategoryDAO() {
+    public CategoryDao() {
     }
 
-    public CategoryDAO(String id, String title) {
+    public CategoryDao(String id, String title) {
         this.id = id;
         this.title = title;
     }

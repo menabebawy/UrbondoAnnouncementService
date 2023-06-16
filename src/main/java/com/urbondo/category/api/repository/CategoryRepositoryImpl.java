@@ -20,35 +20,40 @@ class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     @Override
-    public Optional<CategoryDAO> findById(String id) {
-        CategoryDAO categoryDAO = dynamoDBMapper.load(CategoryDAO.class, id);
-        if (categoryDAO == null) {
+    public Optional<CategoryDao> findById(String id) {
+        CategoryDao categoryDao = dynamoDBMapper.load(CategoryDao.class, id);
+        if (categoryDao == null) {
             return Optional.empty();
         }
-        return Optional.of(dynamoDBMapper.load(CategoryDAO.class, id));
+        return Optional.of(categoryDao);
     }
 
     @Override
-    public Optional<CategoryDAO> findByTitle(String title) {
+    public Optional<CategoryDao> findByTitle(String title) {
         Map<String, AttributeValue> attributesValues = new HashMap<>();
         attributesValues.put(":title", new AttributeValue().withS(title));
 
         Map<String, String> attributesNames = new HashMap<>();
         attributesNames.put("#title", "title");
 
-        DynamoDBQueryExpression<CategoryDAO> queryExpression = new DynamoDBQueryExpression<CategoryDAO>().withIndexName(
+        DynamoDBQueryExpression<CategoryDao> queryExpression = new DynamoDBQueryExpression<CategoryDao>().withIndexName(
                         "title-index")
                 .withKeyConditionExpression("#title = :title")
                 .withExpressionAttributeNames(attributesNames)
                 .withExpressionAttributeValues(attributesValues)
                 .withConsistentRead(false);
 
-        return dynamoDBMapper.query(CategoryDAO.class, queryExpression).stream().findFirst();
+        return dynamoDBMapper.query(CategoryDao.class, queryExpression).stream().findFirst();
     }
 
     @Override
-    public CategoryDAO save(CategoryDAO categoryDAO) {
-        dynamoDBMapper.save(categoryDAO);
-        return categoryDAO;
+    public CategoryDao save(CategoryDao categoryDao) {
+        dynamoDBMapper.save(categoryDao);
+        return categoryDao;
+    }
+
+    @Override
+    public void delete(CategoryDao categoryDao) {
+        dynamoDBMapper.delete(categoryDao);
     }
 }

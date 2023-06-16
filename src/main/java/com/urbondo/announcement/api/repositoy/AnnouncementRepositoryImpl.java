@@ -16,8 +16,8 @@ class AnnouncementRepositoryImpl implements AnnouncementRepository {
     }
 
     @Override
-    public Optional<AnnouncementDAO> findById(String id) {
-        AnnouncementDAO announcementDAO = dynamoDBMapper.load(AnnouncementDAO.class, id);
+    public Optional<AnnouncementDao> findById(String id) {
+        AnnouncementDao announcementDAO = dynamoDBMapper.load(AnnouncementDao.class, id);
 
         if (announcementDAO == null) {
             return Optional.empty();
@@ -27,13 +27,13 @@ class AnnouncementRepositoryImpl implements AnnouncementRepository {
     }
 
     @Override
-    public AnnouncementDAO save(AnnouncementDAO announcementDAO) {
+    public AnnouncementDao save(AnnouncementDao announcementDAO) {
         dynamoDBMapper.save(announcementDAO);
         return announcementDAO;
     }
 
     @Override
-    public void delete(AnnouncementDAO announcementDAO) {
+    public void delete(AnnouncementDao announcementDAO) {
         dynamoDBMapper.delete(announcementDAO);
     }
 }

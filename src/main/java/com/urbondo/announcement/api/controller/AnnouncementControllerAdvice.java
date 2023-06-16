@@ -1,7 +1,7 @@
 package com.urbondo.announcement.api.controller;
 
 import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
-import com.urbondo.ErrorResponse;
+import com.urbondo.core.ErrorResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

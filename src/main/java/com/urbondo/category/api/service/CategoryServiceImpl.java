@@ -2,7 +2,7 @@ package com.urbondo.category.api.service;
 
 import com.urbondo.category.api.controller.CategoryAlreadyExistException;
 import com.urbondo.category.api.controller.ResourceNotFoundException;
-import com.urbondo.category.api.repository.CategoryDAO;
+import com.urbondo.category.api.repository.CategoryDao;
 import com.urbondo.category.api.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +20,8 @@ class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDAO findById(String id) {
-        Optional<CategoryDAO> categoryDAO = categoryRepository.findById(id);
+    public CategoryDao findById(String id) {
+        Optional<CategoryDao> categoryDAO = categoryRepository.findById(id);
         if (categoryDAO.isEmpty()) {
             throw new ResourceNotFoundException();
         }
@@ -29,10 +29,10 @@ class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDAO add(String title) {
+    public CategoryDao add(String title) {
         if (categoryRepository.findByTitle(title).isPresent()) {
             throw new CategoryAlreadyExistException(title);
         }
-        return categoryRepository.save(new CategoryDAO(UUID.randomUUID().toString(), title));
+        return categoryRepository.save(new CategoryDao(UUID.randomUUID().toString(), title));
     }
 }

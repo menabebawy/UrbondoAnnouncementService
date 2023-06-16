@@ -1,9 +1,9 @@
 package com.urbondo.category.api.service;
 
-import com.urbondo.category.api.repository.CategoryDAO;
+import com.urbondo.category.api.repository.CategoryDao;
 
 public interface CategoryService {
-    CategoryDAO findById(String id);
+    CategoryDao findById(String id);
 
-    CategoryDAO add(String title);
+    CategoryDao add(String title);
 }

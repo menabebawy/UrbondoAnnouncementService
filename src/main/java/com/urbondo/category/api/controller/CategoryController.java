@@ -1,6 +1,6 @@
 package com.urbondo.category.api.controller;
 
-import com.urbondo.category.api.repository.CategoryDAO;
+import com.urbondo.category.api.repository.CategoryDao;
 import com.urbondo.category.api.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +21,13 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     @ResponseStatus(OK)
-    CategoryDAO fetchById(@PathVariable @Valid String id) {
+    CategoryDao fetchById(@PathVariable @Valid String id) {
         return categoryService.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(CREATED)
-    CategoryDAO add(@RequestBody @Valid AddCategoryRequestDTO requestDTO) {
+    CategoryDao add(@RequestBody @Valid AddCategoryRequestDto requestDTO) {
         return categoryService.add(requestDTO.title());
     }
 }

@@ -1,15 +1,15 @@
 package com.urbondo.announcement.api.service;
 
-import com.urbondo.announcement.api.controller.AddRequestDTO;
-import com.urbondo.announcement.api.controller.UpdateRequestDTO;
-import com.urbondo.announcement.api.repositoy.AnnouncementDAO;
+import com.urbondo.announcement.api.controller.AddRequestDto;
+import com.urbondo.announcement.api.controller.UpdateRequestDto;
+import com.urbondo.announcement.api.repositoy.AnnouncementDao;
 
 public interface AnnouncementService {
-    AnnouncementDAO findById(String id);
+    AnnouncementDao findById(String id);
 
-    AnnouncementDAO add(AddRequestDTO requestDTO);
+    AnnouncementDao add(AddRequestDto requestDTO);
 
-    AnnouncementDAO update(UpdateRequestDTO requestDTO);
+    AnnouncementDao update(UpdateRequestDto requestDTO);
 
     void deleteById(String id);
 }

@@ -2,7 +2,7 @@ package com.urbondo.announcement.api.controller;
 
 import jakarta.validation.constraints.NotBlank;
 
-public abstract class AnnouncementRequestDTO {
+public abstract class AnnouncementRequestDto {
     @NotBlank(message = "title must not blank")
     protected final String title;
 
@@ -12,7 +12,7 @@ public abstract class AnnouncementRequestDTO {
     @NotBlank(message = "category id must not blank")
     protected final String categoryId;
 
-    protected AnnouncementRequestDTO(String title, String body, String categoryId) {
+    protected AnnouncementRequestDto(String title, String body, String categoryId) {
         this.title = title;
         this.body = body;
         this.categoryId = categoryId;

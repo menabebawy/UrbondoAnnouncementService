@@ -1,11 +1,6 @@
 package com.urbondo.announcement.api.repositoy;
 
-import java.util.Optional;
+import com.urbondo.core.UrbondoRepository;
 
-public interface AnnouncementRepository {
-    Optional<AnnouncementDAO> findById(String id);
-
-    AnnouncementDAO save(AnnouncementDAO announcementDAO);
-
-    void delete(AnnouncementDAO announcementDAO);
+public interface AnnouncementRepository extends UrbondoRepository<AnnouncementDao> {
 }

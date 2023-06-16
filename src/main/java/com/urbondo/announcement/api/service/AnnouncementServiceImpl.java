@@ -1,14 +1,14 @@
 package com.urbondo.announcement.api.service;
 
 import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
-import com.urbondo.announcement.api.controller.AddRequestDTO;
+import com.urbondo.announcement.api.controller.AddRequestDto;
 import com.urbondo.announcement.api.controller.AnnouncementNotFoundException;
-import com.urbondo.announcement.api.controller.UpdateRequestDTO;
-import com.urbondo.announcement.api.repositoy.AnnouncementDAO;
-import com.urbondo.announcement.api.repositoy.AnnouncementRepository;
+import com.urbondo.announcement.api.controller.UpdateRequestDto;
+import com.urbondo.announcement.api.repositoy.AnnouncementDao;
 import com.urbondo.category.api.controller.CategoryNotFoundException;
-import com.urbondo.category.api.repository.CategoryDAO;
+import com.urbondo.category.api.repository.CategoryDao;
 import com.urbondo.category.api.repository.CategoryRepository;
+import com.urbondo.core.UrbondoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,18 +17,18 @@ import java.util.UUID;
 
 @Service
 class AnnouncementServiceImpl implements AnnouncementService {
-    private final AnnouncementRepository announcementRepository;
+    private final UrbondoRepository<AnnouncementDao> announcementRepository;
     private final CategoryRepository categoryRepository;
 
     @Autowired
-    AnnouncementServiceImpl(AnnouncementRepository announcementRepository, CategoryRepository categoryRepository) {
+    AnnouncementServiceImpl(UrbondoRepository<AnnouncementDao> announcementRepository, CategoryRepository categoryRepository) {
         this.announcementRepository = announcementRepository;
         this.categoryRepository = categoryRepository;
     }
 
     @Override
-    public AnnouncementDAO findById(String id) {
-        Optional<AnnouncementDAO> announcementDAO = announcementRepository.findById(id);
+    public AnnouncementDao findById(String id) {
+        Optional<AnnouncementDao> announcementDAO = announcementRepository.findById(id);
 
         if (announcementDAO.isEmpty()) {
             throw new ResourceNotFoundException(id);
@@ -38,20 +38,20 @@ class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
-    public AnnouncementDAO add(AddRequestDTO requestDTO) {
-        CategoryDAO categoryDAO = getCategoryDaoOrThrowException(requestDTO.getCategoryId());
+    public AnnouncementDao add(AddRequestDto requestDTO) {
+        CategoryDao categoryDAO = getCategoryDaoOrThrowException(requestDTO.getCategoryId());
 
-        AnnouncementDAO announcementDAO = new AnnouncementDAO(UUID.randomUUID().toString(),
-                                                              requestDTO.getTitle(),
-                                                              requestDTO.getBody(),
-                                                              requestDTO.getCategoryId(),
-                                                              categoryDAO.getTitle(),
-                                                              requestDTO.getUserId());
+        AnnouncementDao announcementDAO = new AnnouncementDao(UUID.randomUUID().toString(),
+                requestDTO.getTitle(),
+                requestDTO.getBody(),
+                requestDTO.getCategoryId(),
+                categoryDAO.getTitle(),
+                requestDTO.getUserId());
         return announcementRepository.save(announcementDAO);
     }
 
-    private CategoryDAO getCategoryDaoOrThrowException(String id) {
-        Optional<CategoryDAO> categoryDAO = categoryRepository.findById(id);
+    private CategoryDao getCategoryDaoOrThrowException(String id) {
+        Optional<CategoryDao> categoryDAO = categoryRepository.findById(id);
 
         if (categoryDAO.isEmpty()) {
             throw new CategoryNotFoundException(id);
@@ -60,9 +60,9 @@ class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
-    public AnnouncementDAO update(UpdateRequestDTO requestDTO) {
-        AnnouncementDAO storedAnnouncementDao = findByIdOrThrowException(requestDTO.getId());
-        CategoryDAO categoryDAO = getCategoryDaoOrThrowException(requestDTO.getCategoryId());
+    public AnnouncementDao update(UpdateRequestDto requestDTO) {
+        AnnouncementDao storedAnnouncementDao = findByIdOrThrowException(requestDTO.getId());
+        CategoryDao categoryDAO = getCategoryDaoOrThrowException(requestDTO.getCategoryId());
 
         storedAnnouncementDao.setTitle(requestDTO.getTitle());
         storedAnnouncementDao.setBody(requestDTO.getBody());
@@ -74,8 +74,8 @@ class AnnouncementServiceImpl implements AnnouncementService {
         return storedAnnouncementDao;
     }
 
-    private AnnouncementDAO findByIdOrThrowException(String id) {
-        Optional<AnnouncementDAO> announcementDAO = announcementRepository.findById(id);
+    private AnnouncementDao findByIdOrThrowException(String id) {
+        Optional<AnnouncementDao> announcementDAO = announcementRepository.findById(id);
 
         if (announcementDAO.isEmpty()) {
             throw new AnnouncementNotFoundException(id);

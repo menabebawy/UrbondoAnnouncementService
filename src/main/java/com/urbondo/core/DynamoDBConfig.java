@@ -1,4 +1,4 @@
-package com.urbondo;
+package com.urbondo.core;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
