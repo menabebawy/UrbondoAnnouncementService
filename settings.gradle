@@ -1,1 +1,3 @@
 rootProject.name = 'UrbondoAnnouncementService'
+include ":lib"
+project(':lib').projectDir = new File(settingsDir, '../UrbondoLibrary/lib')

@@ -1,6 +1,7 @@
 package com.urbondo.announcement.api.controller;
 
-import com.urbondo.core.ErrorResponse;
+import com.urbondo.lib.ErrorResponse;
+import com.urbondo.lib.UrbondoException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,14 +14,14 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 public class AnnouncementControllerAdvice {
     @ResponseBody
     @ExceptionHandler({MethodArgumentNotValidException.class, AnnouncementNotFoundException.class})
-    ResponseEntity<ErrorResponse> handleControllerException(Throwable exception) {
+    ResponseEntity<ErrorResponse> handleControllerException(UrbondoException exception) {
         return new ResponseEntity<>(new ErrorResponse(BAD_REQUEST, exception.getMessage()), BAD_REQUEST);
     }
 
 
     @ResponseBody
     @ExceptionHandler({ResourceNotFoundException.class})
-    void handleUserNotFoundException(Throwable exception) {
+    void handleUserNotFoundException() {
         // No need to return any response body in case of resource is not existed
     }
 }

@@ -1,6 +1,6 @@
 package com.urbondo.category.api.controller;
 
-import com.urbondo.core.UrbondoException;
+import com.urbondo.lib.UrbondoException;
 
 public class CategoryAlreadyExistException extends UrbondoException {
     public CategoryAlreadyExistException(String title) {

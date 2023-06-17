@@ -1,6 +1,6 @@
 package com.urbondo.category.api.repository;
 
-import com.urbondo.core.UrbondoRepository;
+import com.urbondo.lib.UrbondoRepository;
 
 import java.util.Optional;
 

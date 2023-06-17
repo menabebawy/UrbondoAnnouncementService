@@ -8,7 +8,7 @@ import com.urbondo.announcement.api.repositoy.AnnouncementDao;
 import com.urbondo.category.api.controller.CategoryNotFoundException;
 import com.urbondo.category.api.repository.CategoryDao;
 import com.urbondo.category.api.repository.CategoryRepository;
-import com.urbondo.core.UrbondoRepository;
+import com.urbondo.lib.UrbondoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
