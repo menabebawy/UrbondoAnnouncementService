@@ -1,6 +1,5 @@
 package com.urbondo.announcement.api.service;
 
-import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
 import com.urbondo.announcement.api.controller.AddRequestDto;
 import com.urbondo.announcement.api.controller.AnnouncementNotFoundException;
 import com.urbondo.announcement.api.controller.UpdateRequestDto;
@@ -8,6 +7,7 @@ import com.urbondo.announcement.api.repositoy.AnnouncementDao;
 import com.urbondo.category.api.controller.CategoryNotFoundException;
 import com.urbondo.category.api.repository.CategoryDao;
 import com.urbondo.category.api.repository.CategoryRepository;
+import com.urbondo.lib.ResourceNotFoundException;
 import com.urbondo.lib.UrbondoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ class AnnouncementServiceImpl implements AnnouncementService {
         Optional<AnnouncementDao> announcementDAO = announcementRepository.findById(id);
 
         if (announcementDAO.isEmpty()) {
-            throw new ResourceNotFoundException(id);
+            throw new ResourceNotFoundException();
         }
 
         return announcementDAO.get();

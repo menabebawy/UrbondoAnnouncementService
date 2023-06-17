@@ -1,9 +1,9 @@
 package com.urbondo.category.api.service;
 
 import com.urbondo.category.api.controller.CategoryAlreadyExistException;
-import com.urbondo.category.api.controller.ResourceNotFoundException;
 import com.urbondo.category.api.repository.CategoryDao;
 import com.urbondo.category.api.repository.CategoryRepository;
+import com.urbondo.lib.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

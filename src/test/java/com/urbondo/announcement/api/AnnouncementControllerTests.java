@@ -6,7 +6,7 @@ import com.urbondo.announcement.api.controller.AnnouncementController;
 import com.urbondo.announcement.api.controller.UpdateRequestDto;
 import com.urbondo.announcement.api.repositoy.AnnouncementDao;
 import com.urbondo.announcement.api.service.AnnouncementService;
-import com.urbondo.category.api.controller.ResourceNotFoundException;
+import com.urbondo.lib.ResourceNotFoundException;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
