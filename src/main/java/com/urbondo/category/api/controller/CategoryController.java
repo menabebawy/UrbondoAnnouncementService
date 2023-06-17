@@ -4,6 +4,7 @@ import com.urbondo.category.api.repository.CategoryDao;
 import com.urbondo.category.api.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;

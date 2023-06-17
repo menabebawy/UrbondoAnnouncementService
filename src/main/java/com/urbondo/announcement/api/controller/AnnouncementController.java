@@ -4,6 +4,7 @@ import com.urbondo.announcement.api.repositoy.AnnouncementDao;
 import com.urbondo.announcement.api.service.AnnouncementService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpStatus.*;
 
