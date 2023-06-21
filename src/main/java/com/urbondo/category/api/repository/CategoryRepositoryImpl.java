@@ -36,8 +36,8 @@ class CategoryRepositoryImpl implements CategoryRepository {
         Map<String, String> attributesNames = new HashMap<>();
         attributesNames.put("#title", "title");
 
-        DynamoDBQueryExpression<CategoryDao> queryExpression = new DynamoDBQueryExpression<CategoryDao>().withIndexName(
-                        "title-index")
+        DynamoDBQueryExpression<CategoryDao> queryExpression = new DynamoDBQueryExpression<CategoryDao>()
+                .withIndexName("title-index")
                 .withKeyConditionExpression("#title = :title")
                 .withExpressionAttributeNames(attributesNames)
                 .withExpressionAttributeValues(attributesValues)
